@@ -79,14 +79,12 @@ WSGI_APPLICATION = 'myobject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysql',
+        'NAME': 'osdb',
         'USER': 'root',
         'PASSWORD': '123456',
         'HOST': 'localhost',
         'PORT': '3306',
-        }
     }
 }
 
