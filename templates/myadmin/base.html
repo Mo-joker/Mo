@@ -158,7 +158,7 @@
                                 <img src="{% static 'myadmin/dist/img/user2-160x160.jpg' %}" class="user-image"
                                     alt="User Image">
                                 <!-- hidden-xs hides the username on small devices so only the image appears. -->
-                                <span class="hidden-xs">张无忌</span>
+                                <span class="hidden-xs">{{ request.session.adminuser.username }}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- The user image in the menu -->
@@ -167,8 +167,8 @@
                                         alt="User Image">
 
                                     <p>
-                                        张无忌 - 管理员
-                                        <small>2020年07月16日加入</small>
+                                        {{ request.session.adminuser.username }}- 管理员
+                                        <small>{{ request.session.adminuser.update_at }}加入</small>
                                     </p>
                                 </li>
                                 <!-- Menu Footer-->
@@ -177,7 +177,7 @@
                                         <a href="#" class="btn btn-default btn-flat">个人信息</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">退 出</a>
+                                        <a href="{% url 'myadmin_logout' %}" class="btn btn-default btn-flat">退 出</a>
                                     </div>
                                 </li>
                             </ul>
@@ -201,7 +201,7 @@
                             alt="User Image">
                     </div>
                     <div class="pull-left info">
-                        <p>张无忌 . 管理员</p>
+                        <p> {{ request.session.adminuser.username }} 管理员</p>
                         <!-- Status -->
                         <a href="#"><i class="fa fa-circle text-success"></i> 在线</a>
                     </div>
@@ -267,7 +267,8 @@
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span></button>
                     <h5 class="modal-title"><i class="fa fa-exclamation-circle"></i> [Title]</h5>
                 </div>
                 <div class="modal-body small">

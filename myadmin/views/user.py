@@ -61,11 +61,12 @@ def insert(request):
     if pwd != pwd2:
         context = {"info": "两次输入的密码不一致，请检查密码"}
         return render(request, 'myadmin/info.html', context)
- 
+
     # hash存储用户密码
     import hashlib
     pwd = hashlib.md5()
-    salt = random.randint(100000, 999999)
+    # salt = random.randint(100000, 999999)
+    salt = 210671
     psw_str = str(request.POST.get('inputpsw'))+str(salt)
     pwd.update(psw_str.encode('utf-8'))
     ob.username = username
@@ -81,11 +82,10 @@ def insert(request):
     return render(request, 'myadmin/info.html', context)
 
 
-def delete(request,uid):
+def delete(request, uid):
     '''删除用户信息'''
     try:
-        ob =User.objects.get(id=uid)
-        print('del user : ' ,ob)
+        ob = User.objects.get(id=uid)
         ob.status = 9
         ob.save()
         context = {"info": "员工删除成功！"}
@@ -94,17 +94,14 @@ def delete(request,uid):
     return render(request, 'myadmin/info.html', context)
 
 
-def edit(request,uid):
+def edit(request, uid):
     '''进入编辑用户信息表单'''
     user = User.objects.get(id=uid)
-    print('user info ',user)
-
     context = {"user": user}
     return render(request, 'myadmin/user/edit.html', context)
 
 
-
-def update(request,uid):
+def update(request, uid):
     '''执行用户信息修改'''
     user = User.objects.get(id=uid)
     user.username = request.POST['username']
@@ -112,5 +109,5 @@ def update(request,uid):
     user.status = request.POST['status']
     user.update_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     user.save()
-    context = {"info":"用户信息更新成功"}
+    context = {"info": "用户信息更新成功"}
     return render(request, 'myadmin/info.html', context)
